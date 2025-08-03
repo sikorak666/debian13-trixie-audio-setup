@@ -3,7 +3,7 @@
 # This is a bash script for configuring Debian 13 (trixie) for pro audio USING PIPEWIRE.
 # ---------------------------
 # NOTE: Execute this script by running the following command on your system:
-# 
+# wget -O ~/install-audio.sh https://raw.githubusercontent.com/sikorak666/debian13-trixie-audio-setup/refs/heads/main/install-audio.sh && chmod +x ~/install-audio.sh && ~/install-audio.sh
 
 # Exit if any command fails
 
@@ -13,10 +13,8 @@
 # Update our system
 # ---------------------------
 
-#backup for sources.list
-sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 
-# insert new sources
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 sudo tee /etc/apt/sources.list > /dev/null <<EOL
 deb https://deb.debian.org/debian trixie main contrib non-free non-free-firmware
 deb-src https://deb.debian.org/debian trixie main contrib non-free non-free-firmware
@@ -27,15 +25,14 @@ deb-src https://deb.debian.org/debian trixie-updates main contrib non-free non-f
 deb https://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
 deb-src https://security.debian.org/debian-security trixie-security main contrib non-free non-free-firmware
 EOL
-
-# update
 sudo apt update
-
 sudo apt modernize-sources -y
 sudo apt update && sudo apt upgrade -y
 
+# ---------------------------
 # install basic tools
 sudo apt install curl btop fastfetch net-tools ncdu micro
+# ---------------------------
 
 # ---------------------------
 # Install Liquorix kernel
@@ -44,7 +41,6 @@ sudo apt install curl btop fastfetch net-tools ncdu micro
 
 curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash
 sudo apt install linux-image-liquorix-amd64 linux-headers-liquorix-amd64 -y
-
 
 # ---------------------------
 # Pipewire
