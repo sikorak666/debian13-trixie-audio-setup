@@ -171,3 +171,63 @@ yabridgectl add "$HOME/.wine/drive_c/Program Files/Common Files/VST2"
 yabridgectl add "$HOME/.wine/drive_c/Program Files/Common Files/VST3"
 
 yabridgectl sync
+
+# ---------------------------
+# Pipewire aliases
+# ---------------------------
+# Script to add PipeWire aliases to .bashrc
+# Usage: ./add_pipewire_aliases.sh
+
+# Define file paths
+BASHRC_FILE="$HOME/.bashrc"
+BACKUP_FILE="$HOME/.bashrc.backup.$(date +%Y%m%d_%H%M%S)"
+
+# PipeWire quantum aliases to be added
+ALIASES='
+# PipeWire clock.force-quantum shortcuts
+alias pw0='\''pw-metadata -n settings 0 clock.force-quantum 0'\''
+alias pw64='\''pw-metadata -n settings 0 clock.force-quantum 64'\''
+alias pw128='\''pw-metadata -n settings 0 clock.force-quantum 128'\''
+alias pw256='\''pw-metadata -n settings 0 clock.force-quantum 256'\''
+alias pw512='\''pw-metadata -n settings 0 clock.force-quantum 512'\''
+alias pw1024='\''pw-metadata -n settings 0 clock.force-quantum 1024'\''
+'
+
+echo "Adding PipeWire aliases to .bashrc..."
+
+# Check if .bashrc file exists, create if not
+if [ ! -f "$BASHRC_FILE" ]; then
+    echo ".bashrc file doesn't exist. Creating new file."
+    touch "$BASHRC_FILE"
+fi
+
+# Create backup copy
+echo "Creating backup: $BACKUP_FILE"
+cp "$BASHRC_FILE" "$BACKUP_FILE"
+
+# Check if aliases already exist to prevent duplicates
+if grep -q "pw-metadata -n settings 0 clock.force-quantum" "$BASHRC_FILE"; then
+    echo "PipeWire aliases already exist in .bashrc!"
+    echo "If you want to replace them, please remove them manually first."
+    exit 1
+fi
+
+# Append aliases to the end of .bashrc
+echo "$ALIASES" >> "$BASHRC_FILE"
+
+echo "Aliases have been added to .bashrc"
+echo "To apply changes, run: source ~/.bashrc"
+echo "Backup saved as: $BACKUP_FILE"
+
+# Display added aliases information
+echo ""
+echo "Added aliases:"
+echo "pw0    - sets quantum to 0 (auto)"
+echo "pw64   - sets quantum to 64"
+echo "pw128  - sets quantum to 128" 
+echo "pw256  - sets quantum to 256"
+echo "pw512  - sets quantum to 512"
+echo "pw1024 - sets quantum to 1024"
+
+
+
