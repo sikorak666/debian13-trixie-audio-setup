@@ -31,7 +31,7 @@ sudo apt update && sudo apt upgrade -y
 
 # ---------------------------
 # install basic tools
-sudo apt install curl btop fastfetch net-tools ncdu micro
+sudo apt install curl btop fastfetch net-tools ncdu micro timeshift gdebi synaptic krusader
 # ---------------------------
 
 # ---------------------------
@@ -154,6 +154,8 @@ echo '' >> ~/.bash_aliases
 echo '# Audio: yabridge path' >> ~/.bash_aliases
 echo 'export PATH="$PATH:$HOME/.local/share/yabridge"' >> ~/.bash_aliases
 . ~/.bash_aliases
+
+ sudo apt install q4wine
 
 # libnotify-bin contains notify-send, which is used for yabridge plugin notifications.
 sudo apt install libnotify-bin -y
