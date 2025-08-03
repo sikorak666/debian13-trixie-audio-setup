@@ -132,7 +132,7 @@ echo 'export PATH="$PATH:$HOME/.local/share"' >> ~/.bash_aliases
 . ~/.bash_aliases
 
 # Base wine packages required for proper plugin functionality
-winetricks corefonts
+winetricks corefonts vcrun6sp6
 
 # Make a copy of .wine, as we will use this in the future as the base of
 # new wine prefixes (when installing plugins)
